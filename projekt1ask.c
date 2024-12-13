@@ -181,6 +181,34 @@ void odejmowanieU2(){
 }
 
 void konwersja(){
+    printf("\n 1. Konwersja DEC -> FLOAT \n");
+    printf("\n    W IEEE74 FLOAT liczba jest przechowywana na 32 bitach:");
+    printf("\n    1 bit znaku | 8 bitow cechy | 23 bity mantysy");
+    printf("\n    Zalozmy, ze chcemy dokonac konwersji liczby 231.12 \n");
+    printf("\n    Krok 1. Jesli liczba jest dodatnia - wpisujemy w bit znaku 0, jesli nie - 1.");
+    printf("\n            231.12 - dodatnie, wpisujemy 0");
+    printf("\n            0 ________ _______________________");
+    printf("\n    Krok 2. Teraz musimy zapisac binarnie czesc calkowita i ulamkowa.");
+    printf("\n            213 -> 11010101");
+    printf("\n            0,12 -> 00011110 10111000 01 ...");
+    printf("\n            0,12 * 2 | 0,24 | 0 - wpisujemy pierwsza cyfre po mnozeniu razy 2");
+    printf("\n            0,24 * 2 | 0,48 | 0");
+    printf("\n            0,48 * 2 | 0,96 | 0");
+    printf("\n            0,96 * 2 | 1,92 | 1 - kiedy po mnozeniu razy 2 otrzymamy liczbe wieksza od 1");
+    printf("\n            0,92 * 2 | 1,84 | 1   odejmujemy od niej jeden");
+    printf("\n            ... \n            Kontynujemy, dopoki nie otrzymamy 24 bity lacznie z czescia calkowita");
+    printf("\n            Zapisujemy nasza liczbe z przeinkiem:");
+    printf("\n            11010101,00011110 10111000 01");
+    printf("\n    Krok 3. Zapisujemy liczbe w postaci liczba*2^(potega) tak, oby w czesci calkowitej zostala tylko 1:");
+    printf("\n            11010101,00011110 10111000 01 = 1,10101010 00111101 01110000 1 * 2^7");
+    printf("\n            Czyli przesuwamy przecinek o 7 znakow. Do otrzymanej potegi dwojki dodajemy 127 (bias):");
+    printf("\n            2+127=130 -> 10000010 - wpisujemy do cechy");
+    printf("\n            0 10000010 _______________________");
+    printf("\n    Krok 4. Z otrzymanej liczby wpisujemy do mantysy pierwsze 23 bity czesci ulamkowej");
+    printf("\n            0 10000010 1010101000111101011100001");
+    printf("\n    Gotowe!");
+    printf("\n\n\n 2. Konwersja FLOAT -> DEC \n");
+
 }
 
 int main(){
