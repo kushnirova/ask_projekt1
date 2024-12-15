@@ -1,4 +1,6 @@
+#include <windows.h>
 #include<stdio.h>
+#include <conio.h>
 
 void menu(){
     int opcja, k, typ;
@@ -109,7 +111,7 @@ void wczytdrukbin(int typ){
         printf("\n");
     }
 
-
+powrot();
 }
 
 void drukbin(unsigned char bajt){
@@ -173,8 +175,7 @@ void wczytdrukbajt(int typ){
         }
         printf("\n");
     }
-
-
+powrot();
 }
 
 void odejmowanieU2(){
@@ -194,6 +195,7 @@ void odejmowanieU2(){
     printf("\n    49 (10)(12)|       01 (10) (10)");
     printf("\n    -     1  5 |     -    001    1");
     printf("\n        499  7 |       01   1    1");
+    powrot();
 }
 
 void konwersja(){
@@ -260,8 +262,25 @@ void konwersja(){
         printf("\n            +231,12");
         printf("\n    Gotowe!");
     }
+    powrot();
 
 }
+
+void powrot(){
+    printf("\n\n Wcisnij Q zeby wrocic do menu lub inny przycisk zeby skonczyc program\n");
+    while (1) {
+        if (_kbhit()) {
+            char ch = _getch();
+            if (ch=='q' || ch=='Q') {
+                system("cls");
+                menu();
+                break;
+                }
+            else break;
+        }
+    }
+}
+
 
 int main(){
     menu();
