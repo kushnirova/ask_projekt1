@@ -178,6 +178,22 @@ void wczytdrukbajt(int typ){
 }
 
 void odejmowanieU2(){
+    printf("\n Zasady odejmowania liczb w U2.");
+    printf("\n 1 - 1 = 0");
+    printf("\n 1 - 0 = 0");
+    printf("\n 10 - 1 = 1");
+    printf("\n Odejmowanie w U2 dziala tak samo, jak w systemie dziesietnym: jesli nie ma");
+    printf("\n od czego odejmowac - 'pozyczamy' u sasiada po lewej.");
+    printf("\n     5012      |      1010");
+    printf("\n    -  15      |     -0011");
+    printf("\n Nie mozemy odjac 5 od 2 (1 od 0) - 'zabieramy' 10 (1) z kolejnego rzedu");
+    printf("\n     500 (12)  |      100 (10)");
+    printf("\n    -  1   5   |     -001   1");
+    printf("\n           7   |            1");
+    printf("\n Jesli u sasiada tez za malo - zabieramy u kolejnego");
+    printf("\n    49 (10)(12)|       01 (10) (10)");
+    printf("\n    -     1  5 |     -    001    1");
+    printf("\n        499  7 |       01   1    1");
 }
 
 void konwersja(){
