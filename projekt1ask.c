@@ -181,33 +181,69 @@ void odejmowanieU2(){
 }
 
 void konwersja(){
-    printf("\n 1. Konwersja DEC -> FLOAT \n");
-    printf("\n    W IEEE74 FLOAT liczba jest przechowywana na 32 bitach:");
-    printf("\n    1 bit znaku | 8 bitow cechy | 23 bity mantysy");
-    printf("\n    Zalozmy, ze chcemy dokonac konwersji liczby 231.12 \n");
-    printf("\n    Krok 1. Jesli liczba jest dodatnia - wpisujemy w bit znaku 0, jesli nie - 1.");
-    printf("\n            231.12 - dodatnie, wpisujemy 0");
-    printf("\n            0 ________ _______________________");
-    printf("\n    Krok 2. Teraz musimy zapisac binarnie czesc calkowita i ulamkowa.");
-    printf("\n            213 -> 11010101");
-    printf("\n            0,12 -> 00011110 10111000 01 ...");
-    printf("\n            0,12 * 2 | 0,24 | 0 - wpisujemy pierwsza cyfre po mnozeniu razy 2");
-    printf("\n            0,24 * 2 | 0,48 | 0");
-    printf("\n            0,48 * 2 | 0,96 | 0");
-    printf("\n            0,96 * 2 | 1,92 | 1 - kiedy po mnozeniu razy 2 otrzymamy liczbe wieksza od 1");
-    printf("\n            0,92 * 2 | 1,84 | 1   odejmujemy od niej jeden");
-    printf("\n            ... \n            Kontynujemy, dopoki nie otrzymamy 24 bity lacznie z czescia calkowita");
-    printf("\n            Zapisujemy nasza liczbe z przeinkiem:");
-    printf("\n            11010101,00011110 10111000 01");
-    printf("\n    Krok 3. Zapisujemy liczbe w postaci liczba*2^(potega) tak, oby w czesci calkowitej zostala tylko 1:");
-    printf("\n            11010101,00011110 10111000 01 = 1,10101010 00111101 01110000 1 * 2^7");
-    printf("\n            Czyli przesuwamy przecinek o 7 znakow. Do otrzymanej potegi dwojki dodajemy 127 (bias):");
-    printf("\n            2+127=130 -> 10000010 - wpisujemy do cechy");
-    printf("\n            0 10000010 _______________________");
-    printf("\n    Krok 4. Z otrzymanej liczby wpisujemy do mantysy pierwsze 23 bity czesci ulamkowej");
-    printf("\n            0 10000010 1010101000111101011100001");
-    printf("\n    Gotowe!");
-    printf("\n\n\n 2. Konwersja FLOAT -> DEC \n");
+
+    int opcja, k;
+    printf("\n 1. Konwersja DEC -> FLOAT");
+    printf("\n 2. Konwersja FLOAT -> DEC");
+
+    do {
+        printf("\n Podaj opcje: ");
+        k=scanf("%d",&opcja);
+        if(k==0||opcja<1||opcja>2) printf(" Przy wyborze opcji wystapil blad, sprobuj ponownie");
+        while (getchar()!='\n');
+    }
+    while(k==0||opcja<1||opcja>2);
+    system("cls");
+    printf("\n");
+
+    if (opcja==1){
+        printf(" 1. Konwersja DEC -> FLOAT \n");
+        printf("\n    W IEEE74 FLOAT liczba jest przechowywana na 32 bitach:");
+        printf("\n    1 bit znaku | 8 bitow cechy | 23 bity mantysy");
+        printf("\n    Zalozmy, ze chcemy dokonac konwersji liczby 231.12 \n");
+        printf("\n    Krok 1. Jesli liczba jest dodatnia - wpisujemy w bit znaku 0, jesli nie - 1.");
+        printf("\n            231.12 - dodatnie, wpisujemy 0");
+        printf("\n            0 ________ _______________________");
+        printf("\n    Krok 2. Teraz dla wyrazenia liczba / 2^(potega) musimy dobrac taka potege,");
+        printf("\n            by wartosc tego wyrazenia byla pomiedzy 1 a 2:");
+        printf("\n            231.12 / 2^7 = 1,805625...");
+        printf("\n            Do otrzymanej potegi dodajemy 127 (bias dla float):");
+        printf("\n            7+127=134 -> 10000110");
+        printf("\n            Wynik zapisujemy binarnie do cechy:");
+        printf("\n            0 10000110 _______________________");
+        printf("\n    Krok 3. Czesc ulamkowa wyniku z kroku 2 musimy zapisac binarnie");
+        printf("\n            0,805625... -> 11001110 00111101 0111000 ...");
+        printf("\n            0,805625 * 2 | 1,61125 | 1 - wpisujemy pierwsza cyfre po mnozeniu razy 2");
+        printf("\n            0,61125  * 2 | 1,2225  | 1 - kiedy po mnozeniu razy 2 otrzymamy liczbe wieksza od 1");
+        printf("\n            0,2225   * 2 | 0,445   | 0   odejmujemy od niej jeden");
+        printf("\n            0,445    * 2 | 0,89    | 0 ");
+        printf("\n            0,89     * 2 | 1,78    | 1");
+        printf("\n            ... \n            Kontynujemy, dopoki nie otrzymamy 23 bity");
+        printf("\n    Krok 4. Wynik z kroku 3 wpisujemy do mantysy");
+        printf("\n            0 10000110 11001110 00111101 0111000");
+        printf("\n    Gotowe! \n");
+    }
+    if (opcja==2){
+        printf(" 2. Konwersja FLOAT -> DEC");
+        printf("\n    W IEEE74 FLOAT liczba jest przechowywana na 32 bitach:");
+        printf("\n    1 bit znaku | 8 bitow cechy | 23 bity mantysy");
+        printf("\n    Mozemy skorzystac ze wzoru (-1)^(bit znaku) * (1+mantysa) * 2^(cecha-127)");
+        printf("\n    Zalozmy, ze chcemy dokonac konwersji liczby 0 10000110 11001110 00111101 0111000 \n");
+        printf("\n    Krok 1. Pierwszy bit jest bitem znaku. 1 - liczba ujemna, 0 - dodatnia.");
+        printf("\n            W naszej liczbie piewrszy bit 0 - jest dodatnia");
+        printf("\n    Krok 2. Zapisujemy mantyse decymalnie jako czesc ulamkowa:");
+        printf("\n            0,11001110 00111101 0111000 -> 0,805625...");
+        printf("\n            1*2^(-1)+1*2^(-2)+0*2(-3)+0*2^(-4)+1*2^(-5)+...");
+        printf("\n    Krok 3. Od cechy odejmujemy 127 (bias):");
+        printf("\n            10000110 -> 134-127=7");
+        printf("\n    Krok 4. Do otrzymanego w kroku 2 ulamka dodajemy 1");
+        printf("\n            0,805625... + 1 = 1,805625...");
+        printf("\n            Otrzymana liczbe mnozymy przez 2^(potega obliczona w kroku 3)");
+        printf("\n            1,805625 * 2^7 = 231,12");
+        printf("\n            Pamietamy o znaku (krok 1).");
+        printf("\n            +231,12");
+        printf("\n    Gotowe!");
+    }
 
 }
 
