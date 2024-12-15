@@ -4,26 +4,37 @@
 
 void menu(){
     int opcja, k, typ;
-    printf("\n 1. Wydrukowac postac binarna liczby");
-    printf("\n 2. Wydrukowac postac bajtowa liczby");
-    printf("\n 3. Zaprezentowac zasady odejmowania liczb w U2");
-    printf("\n 4. Zaprezentowac konwersje FLOAT -> DECIMAL lub DECIMAL -> FLOAT \n");
+    printf("\n    1. Wydrukowac postac binarna liczby");
+    printf("\n    2. Wydrukowac postac bajtowa liczby");
+    printf("\n    3. Zaprezentowac zasady odejmowania liczb w U2");
+    printf("\n    4. Zaprezentowac konwersje FLOAT -> DECIMAL lub DECIMAL -> FLOAT \n");
 
     do {
-        printf("\n Podaj opcje: ");
+        SetColor(10,0);
+        printf("\n    Podaj opcje: ");
+        SetColor(15,0);
         k=scanf("%d",&opcja);
-        if(k==0||opcja<1||opcja>4) printf(" Przy wyborze opcji wystapil blad, sprobuj ponownie");
+        if(k==0||opcja<1||opcja>4){
+            SetColor(4,0);
+            printf("    Przy wyborze opcji wystapil blad, sprobuj ponownie");
+            SetColor(15,0);
+        }
         while (getchar()!='\n');
     }
     while(k==0||opcja<1||opcja>4);
     system("cls");
-    printf("\n");
 
     if(opcja==1){
+        SetColor(10,0);
+        printf("\n    Postac binarna liczby\n");
+        SetColor(15,0);
         typ=wyboropcji();
         wczytdrukbin(typ);
     }
     if(opcja==2){
+        SetColor(10,0);
+        printf("\n    Postac bajtowa liczby\n");
+        SetColor(15,0);
         typ=wyboropcji();
         wczytdrukbajt(typ);
     }
@@ -37,14 +48,20 @@ void menu(){
 
 int wyboropcji(){
     int opcja, k;
-    printf(" 1. Int");
-    printf("\n 2. Float");
-    printf("\n 3. Double \n");
+    printf("\n    1. Int");
+    printf("\n    2. Float");
+    printf("\n    3. Double");
 
     do {
-        printf("\n Podaj typ liczby: ");
+        SetColor(10,0);
+        printf("\n    Podaj typ liczby: ");
+        SetColor(15,0);
         k=scanf("%d",&opcja);
-        if(k==0||opcja<1||opcja>3) printf(" Przy wyborze opcji wystapil blad, sprobuj ponownie");
+        if(k==0||opcja<1||opcja>3){
+            SetColor(4,0);
+            printf("    Przy wyborze opcji wystapil blad, sprobuj ponownie");
+            SetColor(15,0);
+        }
         while (getchar()!='\n');
     }
     while(k==0||opcja<1||opcja>3);
@@ -63,15 +80,19 @@ void wczytdrukbin(int typ){
     unsigned char *bajtFLOAT = (unsigned char*)&liczbaFLOAT;
     unsigned char *bajtDOUBLE = (unsigned char*)&liczbaDOUBLE;
 
+    SetColor(10,0);
+    printf("    Postac binarna liczby\n");
+    SetColor(15,0);
+
     if(typ==1){
         do {
-            printf("\n Podaj liczbe: ");
+            printf("\n    Podaj liczbe: ");
             k=scanf("%d",&liczbaINT);
-            if (k==0) printf("\n Blad formatu, sprobuj ponownie");
+            if (k==0) printf("\n    Blad formatu, sprobuj ponownie");
             while(getchar()!='\n');
         }
         while(k==0);
-        printf(" Liczba %d w postaci binarnej: ", liczbaINT);
+        printf("    Liczba %d w postaci binarnej: ", liczbaINT);
 
         for(int i=sizeof(liczbaINT)-1; i>=0;i--){
             drukbin(bajtINT[i]);
@@ -82,13 +103,13 @@ void wczytdrukbin(int typ){
     }
     if(typ==2){
         do {
-            printf("\n Podaj liczbe: ");
+            printf("\n    Podaj liczbe: ");
             k=scanf("%f",&liczbaFLOAT);
-            if (k==0) printf("\n Blad formatu, sprobuj ponownie");
+            if (k==0) printf("\n    Blad formatu, sprobuj ponownie");
             while(getchar()!='\n');
         }
         while(k==0);
-        printf(" Liczba %f w postaci binarnej: ", liczbaFLOAT);
+        printf("    Liczba %f w postaci binarnej: ", liczbaFLOAT);
         for(int i=sizeof(liczbaFLOAT)-1; i>=0;i--){
             drukbin(bajtFLOAT[i]);
             printf(" ");
@@ -97,13 +118,13 @@ void wczytdrukbin(int typ){
     }
     if(typ==3){
         do {
-            printf("\n Podaj liczbe: ");
+            printf("\n    Podaj liczbe: ");
             k=scanf("%lf",&liczbaDOUBLE);
-            if (k==0) printf("\n Blad formatu, sprobuj ponownie");
+            if (k==0) printf("\n    Blad formatu, sprobuj ponownie");
             while(getchar()!='\n');
         }
         while(k==0);
-        printf(" Liczba %lf w postaci binarnej: ", liczbaDOUBLE);
+        printf("    Liczba %lf w postaci binarnej: ", liczbaDOUBLE);
         for(int i=sizeof(liczbaDOUBLE)-1; i>=0;i--){
             drukbin(bajtDOUBLE[i]);
             printf(" ");
@@ -130,15 +151,18 @@ void wczytdrukbajt(int typ){
     unsigned char *bajtFLOAT = (unsigned char*)&liczbaFLOAT;
     unsigned char *bajtDOUBLE = (unsigned char*)&liczbaDOUBLE;
 
+    SetColor(10,0);
+    printf("    Postac bajtowa liczby\n");
+    SetColor(15,0);
     if(typ==1){
         do {
-            printf("\n Podaj liczbe: ");
+            printf("\n    Podaj liczbe: ");
             k=scanf("%d",&liczbaINT);
-            if (k==0) printf("\n Blad formatu, sprobuj ponownie");
+            if (k==0) printf("\n    Blad formatu, sprobuj ponownie");
             while(getchar()!='\n');
         }
         while(k==0);
-        printf(" Liczba %d w postaci bajtowej: ", liczbaINT);
+        printf("    Liczba %d w postaci bajtowej: ", liczbaINT);
 
         for(int i=sizeof(liczbaINT)-1; i>=0;i--){
             printf("%02x ",bajtINT[i]);
@@ -148,14 +172,14 @@ void wczytdrukbajt(int typ){
     }
     if(typ==2){
         do {
-            printf("\n Podaj liczbe: ");
+            printf("\n    Podaj liczbe: ");
             k=scanf("%f",&liczbaFLOAT);
-            if (k==0) printf("\n Blad formatu, sprobuj ponownie");
+            if (k==0) printf("\n    Blad formatu, sprobuj ponownie");
             while(getchar()!='\n');
         }
         while(k==0);
 
-        printf(" Liczba %f w postaci bajtowej: ", liczbaFLOAT);
+        printf("    Liczba %f w postaci bajtowej: ", liczbaFLOAT);
         for(int i=sizeof(liczbaFLOAT)-1; i>=0;i--){
             printf("%02x ",bajtFLOAT[i]);
         }
@@ -163,13 +187,13 @@ void wczytdrukbajt(int typ){
     }
     if(typ==3){
         do {
-            printf("\n Podaj liczbe: ");
+            printf("\n    Podaj liczbe: ");
             k=scanf("%lf",&liczbaDOUBLE);
-            if (k==0) printf("\n Blad formatu, sprobuj ponownie");
+            if (k==0) printf("\n    Blad formatu, sprobuj ponownie");
             while(getchar()!='\n');
         }
         while(k==0);
-        printf(" Liczba %lf w postaci bajtowej: ", liczbaDOUBLE);
+        printf("    Liczba %lf w postaci bajtowej: ", liczbaDOUBLE);
         for(int i=sizeof(liczbaDOUBLE)-1; i>=0;i--){
             printf("%02x ", bajtDOUBLE[i]);
         }
@@ -179,35 +203,53 @@ powrot();
 }
 
 void odejmowanieU2(){
-    printf("\n Zasady odejmowania liczb w U2.");
-    printf("\n 1 - 1 = 0");
-    printf("\n 1 - 0 = 0");
-    printf("\n 10 - 1 = 1");
-    printf("\n Odejmowanie w U2 dziala tak samo, jak w systemie dziesietnym: jesli nie ma");
-    printf("\n od czego odejmowac - 'pozyczamy' u sasiada po lewej.");
-    printf("\n     5012      |      1010");
-    printf("\n    -  15      |     -0011");
-    printf("\n Nie mozemy odjac 5 od 2 (1 od 0) - 'zabieramy' 10 (1) z kolejnego rzedu");
-    printf("\n     500 (12)  |      100 (10)");
-    printf("\n    -  1   5   |     -001   1");
-    printf("\n           7   |            1");
-    printf("\n Jesli u sasiada tez za malo - zabieramy u kolejnego");
-    printf("\n    49 (10)(12)|       01 (10) (10)");
-    printf("\n    -     1  5 |     -    001    1");
-    printf("\n        499  7 |       01   1    1");
+    SetColor(10,0);
+    printf("\n    Zasady odejmowania liczb w U2.\n");
+    SetColor(15,0);
+    printf("\n    1 - 1 = 0");
+    printf("\n    1 - 0 = 0");
+    printf("\n    10 - 1 = 1\n");
+    printf("\n    Odejmowanie w U2 dziala tak samo, jak w systemie dziesietnym: jesli nie ma");
+    printf("\n    od czego odejmowac - 'pozyczamy' u sasiada po lewej.");
+    SetColor(1,0);
+    printf("\n        5012      |      1010");
+    printf("\n       -  15      |     -0011");
+    SetColor(15,0);
+    printf("\n    Nie mozemy odjac 5 od 2 (1 od 0) - 'zabieramy' 10 (1) z kolejnego rzedu");
+    SetColor(1,0);
+    printf("\n        500 (12)  |      100 (10)");
+    printf("\n       -  1   5   |     -001   1");
+    printf("\n              7   |            1");
+    SetColor(15,0);
+    printf("\n    Jesli u sasiada tez za malo - zabieramy u kolejnego");
+    SetColor(1,0);
+    printf("\n       49 (10)(12)|       01 (10) (10)");
+    printf("\n       -     1  5 |     -    001    1");
+    printf("\n           499  7 |       01   1    1");
+    SetColor(10,0);
+    printf("\n    Gotowe!");
     powrot();
 }
 
 void konwersja(){
 
     int opcja, k;
-    printf("\n 1. Konwersja DEC -> FLOAT");
-    printf("\n 2. Konwersja FLOAT -> DEC");
+    SetColor(10,0);
+    printf("\n    Prezentacja konwersji FLOAT -> DECIMAL lub DECIMAL -> FLOAT \n");
+    SetColor(15,0);
+    printf("\n    1. Konwersja DEC -> FLOAT");
+    printf("\n    2. Konwersja FLOAT -> DEC");
 
     do {
-        printf("\n Podaj opcje: ");
+        SetColor(10,0);
+        printf("\n    Podaj opcje: ");
+        SetColor(15,0);
         k=scanf("%d",&opcja);
-        if(k==0||opcja<1||opcja>2) printf(" Przy wyborze opcji wystapil blad, sprobuj ponownie");
+        if(k==0||opcja<1||opcja>2){
+            SetColor(4,0);
+            printf("    Przy wyborze opcji wystapil blad, sprobuj ponownie");
+            SetColor(15,0);
+        }
         while (getchar()!='\n');
     }
     while(k==0||opcja<1||opcja>2);
@@ -215,7 +257,9 @@ void konwersja(){
     printf("\n");
 
     if (opcja==1){
-        printf(" 1. Konwersja DEC -> FLOAT \n");
+        SetColor(10,0);
+        printf("    Konwersja DEC -> FLOAT \n");
+        SetColor(15,0);
         printf("\n    W IEEE74 FLOAT liczba jest przechowywana na 32 bitach:");
         printf("\n    1 bit znaku | 8 bitow cechy | 23 bity mantysy");
         printf("\n    Zalozmy, ze chcemy dokonac konwersji liczby 231.12 \n");
@@ -239,10 +283,14 @@ void konwersja(){
         printf("\n            ... \n            Kontynujemy, dopoki nie otrzymamy 23 bity");
         printf("\n    Krok 4. Wynik z kroku 3 wpisujemy do mantysy");
         printf("\n            0 10000110 11001110 00111101 0111000");
-        printf("\n    Gotowe! \n");
+        SetColor(10,0);
+        printf("\n    Gotowe!");
+        SetColor(15,0);
     }
     if (opcja==2){
-        printf(" 2. Konwersja FLOAT -> DEC");
+        SetColor(10,0);
+        printf("    Konwersja FLOAT -> DEC\n");
+        SetColor(15,0);
         printf("\n    W IEEE74 FLOAT liczba jest przechowywana na 32 bitach:");
         printf("\n    1 bit znaku | 8 bitow cechy | 23 bity mantysy");
         printf("\n    Mozemy skorzystac ze wzoru (-1)^(bit znaku) * (1+mantysa) * 2^(cecha-127)");
@@ -260,14 +308,18 @@ void konwersja(){
         printf("\n            1,805625 * 2^7 = 231,12");
         printf("\n            Pamietamy o znaku (krok 1).");
         printf("\n            +231,12");
+        SetColor(10,0);
         printf("\n    Gotowe!");
+        SetColor(15,0);
     }
     powrot();
 
 }
 
 void powrot(){
-    printf("\n\n Wcisnij Q zeby wrocic do menu lub inny przycisk zeby skonczyc program\n");
+    SetColor(8 ,0);
+    printf("\n\n    Wcisnij Q zeby wrocic do menu lub inny przycisk zeby skonczyc program\n    ");
+    SetColor(15,0);
     while (1) {
         if (_kbhit()) {
             char ch = _getch();
@@ -281,6 +333,10 @@ void powrot(){
     }
 }
 
+void SetColor(int text, int background) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, (background << 4) | text);
+}
 
 int main(){
     menu();
